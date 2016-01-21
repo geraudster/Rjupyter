@@ -5,6 +5,7 @@ RUN echo 'deb http://ftp.igh.cnrs.fr/pub/CRAN/bin/linux/debian jessie-cran3/' >>
 RUN apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y install locales
+RUN sed -i.bak 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -28,12 +29,12 @@ RUN pip3 install jupyter
 
 COPY install-irkernel.R /tmp
 
-RUN (adduser --disabled-password --gecos "" jupyter && echo "jupyter:jupyter"|chpasswd)
+RUN (adduser --disabled-password --gecos "" jupyter)
 
 RUN mkdir -p /home/jupyter/.jupyter && chown jupyter /home/jupyter/.jupyter
 RUN mkdir -p /data/jupyter && chown jupyter /data/jupyter
 
-COPY jupyter_notebook_config.py /home/jupyter/.jupyter
+#COPY jupyter_notebook_config.py /home/jupyter/.jupyter
 COPY Rprofile /home/jupyter/.Rprofile
 
 USER jupyter
