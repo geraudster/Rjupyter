@@ -1,13 +1,13 @@
 ## Get image
 
-   docker pull geraudster/rjupyter
+    $ docker pull geraudster/rjupyter
 
 ## Configuration
 
 Create a directory ~/.jupyter/secret, then create keypair:
 
-    cd ~/.jupyter/secret
-    openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem
+    $ cd ~/.jupyter/secret
+    $ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem
 
 Generate a hashed password:
 
@@ -23,10 +23,11 @@ Type your password, then copy-paste the hashed password in your ~/.jupyter/secre
 
 Create a working dir where all notebooks will be stored:
 
-    mkdir ~/jupyter
+    $ mkdir ~/jupyter
 
 ## Run it
 
-    docker run -d -v $HOME/.jupyter/secret:/home/jupyter/secret \
-                  -v $HOME/jupyter:/data/jupyter \
-                  -p 8888:8888 geraudster/rjupyter jupyter notebook
+    $ docker run -d -v $HOME/.jupyter/secret:/home/jupyter/secret \
+                    -v $HOME/jupyter:/data/jupyter \
+                    -p 8888:8888 geraudster/rjupyter jupyter notebook
+
