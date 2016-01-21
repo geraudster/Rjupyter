@@ -116,7 +116,7 @@ c.NotebookApp.ip = '*'
 # c.NotebookApp.allow_origin_pat = ''
 
 # The full path to an SSL/TLS certificate file.
-# c.NotebookApp.certfile = u''
+c.NotebookApp.certfile = u'/home/jupyter/secret/mycert.pem'
 
 # The logout handler class to use.
 # c.NotebookApp.logout_handler_class = <class 'notebook.auth.logout.LogoutHandler'>
@@ -174,7 +174,7 @@ c.NotebookApp.ip = '*'
 # platform dependent and determined by the python standard library `webbrowser`
 # module, unless it is overridden using the --browser (NotebookApp.browser)
 # configuration option.
-# c.NotebookApp.open_browser = True
+c.NotebookApp.open_browser = False
 
 # Hashed password to use for web authentication.
 #
@@ -214,7 +214,7 @@ c.NotebookApp.ip = '*'
 # c.NotebookApp.config_manager_class = <class 'notebook.services.config.manager.ConfigManager'>
 
 # The full path to a private key file for usage with SSL/TLS.
-# c.NotebookApp.keyfile = u''
+c.NotebookApp.keyfile = u'/home/jupyter/secret/mykey.key'
 
 # DEPRECATED, use tornado_settings
 # c.NotebookApp.webapp_settings = traitlets.Undefined
@@ -514,3 +514,9 @@ c.NotebookApp.ip = '*'
 #
 # By default, all installed kernels are allowed.
 # c.KernelSpecManager.whitelist = traitlets.Undefined
+import configparser
+
+config = configparser.ConfigParser()
+config.read('/home/jupyter/secret/secret.ini')
+print(config.sections())
+c.NotebookApp.password = config.get('Password', 'password')

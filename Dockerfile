@@ -34,7 +34,7 @@ RUN (adduser --disabled-password --gecos "" jupyter)
 RUN mkdir -p /home/jupyter/.jupyter && chown jupyter /home/jupyter/.jupyter
 RUN mkdir -p /data/jupyter && chown jupyter /data/jupyter
 
-#COPY jupyter_notebook_config.py /home/jupyter/.jupyter
+COPY conf/jupyter_notebook_config.py /home/jupyter/.jupyter
 COPY Rprofile /home/jupyter/.Rprofile
 
 USER jupyter
