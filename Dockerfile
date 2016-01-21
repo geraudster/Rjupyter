@@ -27,9 +27,9 @@ RUN apt-get -y install \
 
 RUN pip3 install jupyter
 
-COPY install-irkernel.R /tmp
-
 RUN (adduser --disabled-password --gecos "" jupyter)
+
+COPY install-irkernel.R /home/jupyter
 
 RUN mkdir -p /home/jupyter/.jupyter && chown jupyter /home/jupyter/.jupyter
 RUN mkdir -p /data/jupyter && chown jupyter /data/jupyter
@@ -42,5 +42,5 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN mkdir -p ~/R/x86_64-pc-linux-gnu-library/3.2
-RUN R -f /tmp/install-irkernel.R
+RUN R -f /home/jupyter/install-irkernel.R
 WORKDIR /data/jupyter
