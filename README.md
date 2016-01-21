@@ -18,8 +18,12 @@ Type your password, then copy-paste the hashed password in your ~/.jupyter/secre
     [Password]
     password = sha1:f09ac5efb12e:b628023298e751bb20b83466d63a9ed3ce04e9e9
 
+Create a working dir where all notebooks will be stored:
+
+    mkdir ~/jupyter
+
 ## Run it
 
     docker run -d -v $HOME/.jupyter/secret:/home/jupyter/secret \
-                  -v /home/geraud/jupyter:/data/jupyter \
+                  -v $HOME/jupyter:/data/jupyter \
                   -p 8888:8888 geraudster/rjupyter jupyter notebook
