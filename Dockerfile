@@ -29,12 +29,12 @@ RUN pip3 install jupyter
 
 RUN (adduser --disabled-password --gecos "" jupyter)
 
-COPY install-irkernel.R /home/jupyter
+COPY install-irkernel.R /home/jupyter/
 
-RUN mkdir -p /home/jupyter/.jupyter && chown jupyter /home/jupyter/.jupyter
-RUN mkdir -p /data/jupyter && chown jupyter /data/jupyter
+RUN mkdir -p /home/jupyter/.jupyter/ && chown jupyter /home/jupyter/.jupyter/
+RUN mkdir -p /data/jupyter/ && chown jupyter /data/jupyter/
 
-COPY conf/jupyter_notebook_config.py /home/jupyter/.jupyter
+COPY conf/jupyter_notebook_config.py /home/jupyter/.jupyter/
 COPY Rprofile /home/jupyter/.Rprofile
 
 USER jupyter
@@ -43,4 +43,4 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN mkdir -p ~/R/x86_64-pc-linux-gnu-library/3.2
 RUN R -f /home/jupyter/install-irkernel.R
-WORKDIR /data/jupyter
+WORKDIR /data/jupyter/
