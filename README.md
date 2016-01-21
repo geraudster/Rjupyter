@@ -1,3 +1,6 @@
+## Get image
+
+   docker pull geraudster/rjupyter
 
 ## Configuration
 
