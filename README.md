@@ -31,3 +31,4 @@ Create a working dir where all notebooks will be stored:
                     -v $HOME/jupyter:/data/jupyter \
                     -p 8888:8888 geraudster/rjupyter jupyter notebook
 
+Then open your browser to https://localhost:8888
