@@ -10,7 +10,11 @@ RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install \
     r-base \
     r-base-dev \
-    r-cran-rjava
+    wget
+
+RUN R CMD javareconf JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 JAVA=/usr/bin/java
+RUN wget http://www.rforge.net/rJava/snapshot/rJava_0.9-9.tar.gz
+RUN R CMD INSTALL --configure-args="--disable-Xrs" rJava_0.9-9.tar.gz
 
 COPY install-irkernel.R /home/jupyter/
 COPY Rprofile /home/jupyter/.Rprofile
@@ -22,3 +26,4 @@ ENV LC_ALL en_US.UTF-8
 RUN mkdir -p ~/R/x86_64-pc-linux-gnu-library/3.2
 RUN R -f /home/jupyter/install-irkernel.R
 WORKDIR /data/jupyter/
+
