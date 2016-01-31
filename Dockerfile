@@ -8,6 +8,7 @@ RUN apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480
 RUN apt-get update && apt-get -y upgrade
 
 RUN apt-get -y install \
+    libssl-dev \
     r-base \
     r-base-dev \
     wget
