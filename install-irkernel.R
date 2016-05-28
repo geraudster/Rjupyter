@@ -1,5 +1,8 @@
 # install R Kernel
+library(devtools)
+# Install the packages
+install_github('IRkernel/repr')
+install_github('IRkernel/IRdisplay')
+install_github('IRkernel/IRkernel')
 
-install.packages(c('rzmq','repr','IRkernel','IRdisplay'), c('~/R/x86_64-pc-linux-gnu-library/3.3'),
-                 repos = c('http://irkernel.github.io/', getOption('repos')))
 IRkernel::installspec()

@@ -25,6 +25,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN mkdir -p ~/R/x86_64-pc-linux-gnu-library/3.3
+RUN R -e 'if (!require("devtools")) install.packages("devtools", repos="https://cran.rstudio.com/")'
 RUN R -f /home/jupyter/install-irkernel.R
 WORKDIR /data/jupyter/
 
