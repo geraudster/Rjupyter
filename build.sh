@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker build -t geraudster/rjupyter .
+docker build --force-rm -t geraudster/rjupyter .
 
