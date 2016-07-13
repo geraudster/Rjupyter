@@ -29,6 +29,6 @@ Create a working dir where all notebooks will be stored:
 
     $ docker run -d -v $HOME/.jupyter/secret:/home/jupyter/secret \
                     -v $HOME/jupyter:/data/jupyter \
-                    -p 8888:8888 geraudster/rjupyter jupyter notebook
+                    -p 8888:8888 geraudster/rjupyter
 
 Then open your browser to https://localhost:8888
