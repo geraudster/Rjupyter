@@ -2,20 +2,20 @@ FROM geraudster/dockerjupyter
 MAINTAINER geraudster
 
 USER root
-RUN echo 'deb http://ftp.igh.cnrs.fr/pub/CRAN/bin/linux/debian jessie-cran3/' >> /etc/apt/sources.list
-RUN apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480
+RUN echo 'deb http://ftp.igh.cnrs.fr/pub/CRAN/bin/linux/debian jessie-cran3/' >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480
 
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y install \
+RUN apt-get -y update && \
+      apt-get -y --no-install-recommends install \
       libssl-dev \
       r-base \
       r-base-dev \
-      wget
+      wget && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN R CMD javareconf JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 JAVA=/usr/bin/java
-RUN wget http://www.rforge.net/rJava/snapshot/rJava_0.9-9.tar.gz
-RUN R CMD INSTALL --configure-args="--disable-Xrs" rJava_0.9-9.tar.gz
+RUN R CMD javareconf JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 JAVA=/usr/bin/java && \
+    wget http://www.rforge.net/rJava/snapshot/rJava_0.9-9.tar.gz && \
+    R CMD INSTALL --configure-args="--disable-Xrs" rJava_0.9-9.tar.gz
 
 COPY install-irkernel.R /home/jupyter/
 COPY Rprofile /home/jupyter/.Rprofile
@@ -28,4 +28,3 @@ RUN mkdir -p ~/R/x86_64-pc-linux-gnu-library/3.3
 RUN R -e 'if (!require("devtools")) install.packages("devtools", repos="https://cran.rstudio.com/")'
 RUN R -f /home/jupyter/install-irkernel.R
 WORKDIR /data/jupyter/
-CMD jupyter notebook
