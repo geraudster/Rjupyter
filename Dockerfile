@@ -7,14 +7,22 @@ RUN echo 'deb http://ftp.igh.cnrs.fr/pub/CRAN/bin/linux/debian jessie-cran3/' >>
 
 RUN apt-get -y update && \
       apt-get -y --no-install-recommends install \
+      build-essential \
       libssl-dev \
       r-base \
       r-base-dev \
-      wget && \
+      libcurl4-gnutls-dev \
+      libzmq3-dev \
+      && \
     rm -rf /var/lib/apt/lists/*
 
+#RUN apt-get -y update && \
+#    apt-get -y --no-install-recommends -t jessie-backports install r-cran-stringi \
+#    && \
+#    rm -rf /var/lib/apt/lists/*
+
 RUN R CMD javareconf JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 JAVA=/usr/bin/java && \
-    wget http://www.rforge.net/rJava/snapshot/rJava_0.9-9.tar.gz && \
+    curl -o rJava_0.9-9.tar.gz http://www.rforge.net/rJava/snapshot/rJava_0.9-9.tar.gz && \
     R CMD INSTALL --configure-args="--disable-Xrs" rJava_0.9-9.tar.gz
 
 COPY install-irkernel.R /home/jupyter/
